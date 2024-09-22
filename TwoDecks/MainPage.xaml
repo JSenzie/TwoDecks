@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiCards"
+             x:Class="TwoDecks.MainPage">
+    <ContentPage.Resources>
+        <local:Deck x:Key="Deck1"/>
+        <local:Deck x:Key="Deck2"/>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <CollectionView x:Name="Deck1" BackgroundColor="DarkGray" SelectionMode="Single" 
+                ItemsSource="{StaticResource Deck1}" Grid.Column="0" Grid.ColumnSpan="2">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" TextColor="Black" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView x:Name="Deck2" BackgroundColor="DarkGray" SelectionMode="Single" 
+                ItemsSource="{StaticResource Deck2}" Grid.Column="2" Grid.ColumnSpan="2">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" TextColor="Black" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Margin="5" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" BindingContext="{StaticResource Deck1}" Text="{Binding Count, StringFormat='{0} cards in the deck'}" Grid.Row="1" Grid.Column="0"/>
+                <Button Margin="5" x:Name="Deck1_Move" Clicked="Deck1_Move_Clicked" Text="Move Selected Card" Grid.Row="1" Grid.Column="1"/>
+                <Label Margin="5" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" BindingContext="{StaticResource Deck2}" Text="{Binding Count, StringFormat='{0} cards in the deck'}" Grid.Row="1" Grid.Column="2"/>
+                <Button Margin="5" x:Name="Deck2_Move" Clicked="Deck2_Move_Clicked" Text="Move Selected Card" Grid.Row="1" Grid.Column="3"/>
+
+                <Button Clicked="ShuffleDeck1_Clicked" Margin="5" Text="Shuffle" Grid.Row="2" Grid.Column="0"/>
+                <Button Clicked="SortDeck1_Clicked" Margin="5" Text="Sort" Grid.Row="2" Grid.Column="1"/>
+                <Button Clicked="ShuffleDeck2_Clicked" Margin="5" Text="Shuffle" Grid.Row="2" Grid.Column="2"/>
+                <Button Clicked="SortDeck2_Clicked" Margin="5" Text="Sort" Grid.Row="2" Grid.Column="3"/>
+
+                <Button Clicked="ResetDeck1_Clicked" Margin="5" Text="Reset" Grid.Row="3" Grid.Column="0"/>
+                <Button Clicked="ClearDeck1_Clicked" Margin="5" Text="Clear" Grid.Row="3" Grid.Column="1"/>
+                <Button Clicked="ResetDeck2_Clicked" Margin="5" Text="Reset" Grid.Row="3" Grid.Column="2"/>
+                <Button Clicked="ClearDeck2_Clicked" Margin="5" Text="Clear" Grid.Row="3" Grid.Column="3"/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
